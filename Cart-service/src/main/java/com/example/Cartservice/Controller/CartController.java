@@ -23,5 +23,4 @@ public class CartController {
         return ResponseEntity.ok(cartItemDtoResponse);
     }
 
-    // Other endpoints for cart management can go here
 }
