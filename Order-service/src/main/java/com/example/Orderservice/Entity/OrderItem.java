@@ -34,7 +34,6 @@ public class OrderItem {
     @Column(name = "item_name")
     private String itemName; ////product name
 
-
     @Column(name = "price_per_unit")
     private Double itemPrice; //product price per unit for db
 
@@ -45,7 +44,7 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
-//
+
 //    @Column(name = "product_id")
 //    private Long productId;
 

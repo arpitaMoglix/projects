@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderRequest {
     private Integer status;
-    private Long subtotal;
+    private Double subtotal;
     private Date createdAt;
     private Date updatedAt;
     private Long userId;

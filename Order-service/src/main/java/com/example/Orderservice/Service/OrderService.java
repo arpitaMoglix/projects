@@ -49,25 +49,36 @@ public class OrderService implements OrderServiceInterface{
 
     @Override
     public OrderResponse orderInsert(OrderRequest orderRequest) {
+
+
+
+
         Integer status = orderRequest.getStatus();
-        Long subtotal = orderRequest.getSubtotal();
         Long userId = orderRequest.getUserId();
         List<OrderItemDTO> orderItemsDTO = orderRequest.getOrderItems();
+        Double subtotal = 0.0;
 
-        Order orderObj = new Order(status, subtotal, userId);
+        Order orderObj = new Order(status, 0.0, userId, new Date(), new Date());
 
         for (OrderItemDTO itemDTO : orderItemsDTO) {
             OrderItem orderItem = new OrderItem();
-            orderItem.setCreatedAt(itemDTO.getCreatedAt());
-            orderItem.setUpdatedAt(itemDTO.getUpdatedAt());
+            orderItem.setCreatedAt(new Date());
+            orderItem.setUpdatedAt(new Date());
             orderItem.setItemQuantity(itemDTO.getItemQuantity());
             orderItem.setItemName(itemDTO.getItemName());
             orderItem.setItemPrice(itemDTO.getItemPrice());
-            orderItem.setItemtotalPrice(itemDTO.getItemTotalPrice());
-            // Set the order for each order item
+
+            // Calculate and set the total price for the item
+            double itemTotalPrice = itemDTO.getItemQuantity() * itemDTO.getItemPrice();
+            orderItem.setItemtotalPrice(itemTotalPrice);
+            // Add itemTotalPrice to subtotal
+            subtotal += itemTotalPrice;
+
             orderItem.setOrder(orderObj);
             orderObj.getOrderItems().add(orderItem);
         }
+
+        orderObj.setSubtotal(subtotal);
 
         Order savedOrder = orderRepository.save(orderObj);
 

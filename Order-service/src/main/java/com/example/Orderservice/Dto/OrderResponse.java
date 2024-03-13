@@ -12,7 +12,7 @@ import java.util.List;
 public class OrderResponse {
     private Long id;
     private Integer status;
-    private Long subtotal;
+    private Double subtotal;
     private Date createdAt;
     private Date updatedAt;
     private Long userId;

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class Order {
     private Integer status;
 
     @Column(name = "subtotal")
-    private Long subtotal; //(listofitem * totalpriceof items)
+    private Double subtotal; //(listofitem * totalpriceof items)
 
     @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
@@ -40,13 +41,15 @@ public class Order {
     private Long userId;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
+    private List<OrderItem> orderItems = new ArrayList<>();
 
 
-    public Order(Integer status, Long subtotal, Long userId) {
+    public Order(Integer status,Double subtotal, Long userId, Date createdAt, Date updatedAt ) {
         this.status = status;
         this.subtotal = subtotal;
         this.userId = userId;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
 
     }
 
