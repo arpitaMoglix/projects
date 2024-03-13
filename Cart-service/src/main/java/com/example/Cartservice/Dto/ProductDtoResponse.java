@@ -12,4 +12,5 @@ public class ProductDtoResponse {
     private String productName;
     private Double productPrice;
     private String productDescription;
+    private Integer quantity;
 }
