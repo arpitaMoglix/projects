@@ -15,7 +15,6 @@ public class ProductService implements ProductServiceInterface{
         this.restTemplate = restTemplate;
     }
 
-
     public ProductDtoResponse getProductDetails(Long productId) {
         ResponseEntity<ProductDtoResponse> responseEntity = restTemplate.exchange(
                 "http://localhost:8080/product/getDetails/" + productId,

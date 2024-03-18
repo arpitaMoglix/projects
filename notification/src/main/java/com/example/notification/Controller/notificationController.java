@@ -1,7 +1,11 @@
 package com.example.notification.Controller;
 
 
+import com.example.notification.dto.EmailDTO;
+//import com.example.notification.kafka.EmailProducer;
 import com.example.notification.service.EmailSender;
+import com.example.notification.service.EmailServiceInterface;
+import jakarta.mail.MessagingException;
 import com.example.notification.service.EmailServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.Map;
 
 
@@ -17,20 +22,29 @@ import java.util.Map;
 public class notificationController {
 
     @Autowired
-    private EmailServiceInterface emailServiceInterface;
+    private EmailServiceInterface emailService;
+
+//    @Autowired
+//    private EmailProducer emailProducer;
 
     @PostMapping("/sendEmail")
-    public String sendEmail(@RequestBody Map<String, String> request){
-        String email = request.get("email");
-        // Call the sendEmail method to send an email
-        String subject = "Test Email";
-        String content = "<p>Hello,</p><p>This is a test email sent from Spring Boot.</p>";
-
+    public String sendEmail(@RequestBody EmailDTO emailDTO) {
         try {
-            emailServiceInterface.sendEmail(email, subject, content);
+            emailService.sendEmail(emailDTO);
             return "Email sent successfully.";
-        } catch (Exception e) {
+        } catch (MessagingException | IOException e) {
             return "Failed to send email. Error: " + e.getMessage();
         }
     }
+
+//    @PostMapping("/sendEmail")
+//    public String sendEmail(@RequestBody EmailDTO emailDTO) {
+//        try {
+//            emailProducer.sendEmail(emailDTO);
+//            return "Email request sent successfully.";
+//        } catch (Exception e) {
+//            return "Failed to send email request. Error: " + e.getMessage();
+//        }
+//    }
+
 }

@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserDtoResponse {
     private Long Id;
+    private String email;
 }

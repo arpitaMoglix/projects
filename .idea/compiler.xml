@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="User-service" />
         <module name="product-service" />
+        <module name="notification" />
         <module name="Order-service" />
         <module name="Cart-service" />
       </profile>
@@ -19,6 +20,7 @@
       <module name="Cart-service" options="-parameters" />
       <module name="Order-service" options="-parameters" />
       <module name="User-service" options="-parameters" />
+      <module name="notification" options="-parameters" />
       <module name="product-service" options="-parameters" />
     </option>
   </component>

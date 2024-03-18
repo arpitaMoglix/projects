@@ -25,8 +25,15 @@ public class OrderController {
 
     @GetMapping("/getDetails/{id}")
     public ResponseEntity<OrderResponse> getOrder(@PathVariable Long id){
+//        OrderResponse result = orderService.findById(id);
+//        return new ResponseEntity<OrderResponse>(result,HttpStatus.OK);
+
         OrderResponse result = orderService.findById(id);
-        return new ResponseEntity<OrderResponse>(result,HttpStatus.OK);
+        if (result != null) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/cancel/{id}")
